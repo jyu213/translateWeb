@@ -1,0 +1,25 @@
+{
+  "plugins": [
+    "mocha",
+    "html"
+  ],
+  "rules": {
+    "arrow-parens": 0,
+    "generator-star-spacing": 0,
+    "indent": [2, 2, {"SwitchCase": 1}],
+    "semi": 0,
+    "quotes": [2, "single", { "allowTemplateLiterals": true }],
+    "mocha/no-exclusive-tests": 2
+  },
+  "globals": {
+  },
+  "env": {
+    "browser": true
+  },
+
+  "extends": "standard",
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module"
+  }
+}
