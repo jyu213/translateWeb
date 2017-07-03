@@ -18,11 +18,12 @@ exports.list = (params) => {
         break;
     }
   }
-  const SQL = `SELECT * FROM ${TRANSLATE_LIST_TABLE} ${sqlArr.length > 0 && 'WHERE ' + sqlArr.join(' AND ')} ORDER BY UPDATE_TIME`
+  const SQL = `SELECT * FROM ${TRANSLATE_LIST_TABLE} ${sqlArr.length > 0 ? 'WHERE ' + sqlArr.join(' AND ') : ''} ORDER BY MODIFY_TIME`
   let promise = new Promise((resolve, reject) => {
+    console.log('RUN SQL: ', SQL)
     db.all(SQL, (err, rows) => {
       if (err) {
-        reject([])
+        reject(new Error(err))
       }
       let data = rows.map((item) => {
         return {

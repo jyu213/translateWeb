@@ -20,7 +20,9 @@ const db = new sqlite3.Database(CONFIG.DBPATH)
 exports.create = (params) => {
   let promise = new Promise((resolve, reject) => {
     db.serialize(() => {
-      const CREATE_SQL = `CREATE TABLE IF NOT EXISTS ${TRANSLATE_LIST_TABLE} (ID INTEGER PRIMARY KEY, USER_ID TEXT, ROJECT_TITLE TEXT, PROJECT_LINK TEXT, PROJECT_AUTHOR TEXT, PROJECT_DESCRIPTION TEXT, CREATE_TIME TEXT, MODIFY_TIME TEXT)`
+      const CREATE_SQL = `CREATE TABLE IF NOT EXISTS ${TRANSLATE_LIST_TABLE} (ID INTEGER PRIMARY KEY,
+                          USER_ID TEXT, PROJECT_TITLE TEXT, PROJECT_LINK TEXT, PROJECT_AUTHOR TEXT,
+                          PROJECT_DESCRIPTION TEXT, PROJECT_TAGS TEXT, CREATE_TIME TEXT, MODIFY_TIME TEXT)`
       db.run(CREATE_SQL)
       const { userId, title, link, author, description, tags } = params
       const currentTime = (new Date()).getTime()
@@ -30,17 +32,23 @@ exports.create = (params) => {
         $project_link: link,
         $project_author: author,
         $project_description: description,
-        $tags: tags,
+        $project_tags: tags,
         $create_time: currentTime,
-        $modity_time: currentTime
+        $modify_time: currentTime
       }
 
-      const INSERT_SQL = `INSERT INTO ${TRANSLATE_LIST_TABLE} VALUES ($id, $user_id, $project_title, $project_link, $project_author, $project_description, $create_time, $modify_time)`
+      console.log(data, 'the data')
+      const INSERT_SQL = `INSERT INTO ${TRANSLATE_LIST_TABLE} VALUES ($id,
+                                      $user_id, $project_title, $project_link,
+                                      $project_author, $project_description, $project_tags,
+                                      $create_time, $modify_time)`
+
+      console.log('RUNSQL: ', INSERT_SQL)
       db.run(INSERT_SQL, data, (err) => {
         if (err) {
           reject(err)
         }
-        resolve()
+        resolve('success')
       })
     })
   })

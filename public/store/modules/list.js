@@ -14,6 +14,7 @@ const getters = {
 // actions
 const actions = {
   getLists ({ commit }) {
+    console.log(list)
     list.getLists((lists) => {
       commit(types.RECEIVE_LISTS, {lists})
     })
