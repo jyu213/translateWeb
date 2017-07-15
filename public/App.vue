@@ -25,9 +25,13 @@ export default {
     box-sizing: border-box;
   }
 
-  .container{
+  .wrapper{
     margin: 0 auto;
     max-width: 1140px;
+  }
+  .sm-wrapper{
+    margin: 0 auto;
+    max-width: 640px;
   }
   html{
     font-size: 10px;

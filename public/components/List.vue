@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper container">
+  <div class="wrapper">
     <ul class="list">
       <li class="list--item card" v-for="item in lists">
         <div class="card--ava ava"><img class="ava--img" :src="!item.ava" /></div>

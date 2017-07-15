@@ -13,7 +13,7 @@ const api = require('./src/api/list')
 
 // 装载所有子路由
 let router = new Router()
-router.use('/', page.routes(), page.allowedMethods())
+router.use('/list', page.routes(), page.allowedMethods())
 router.use('/api', api.routes())
 
 // ctx.body解析

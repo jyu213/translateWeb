@@ -1,4 +1,4 @@
-import list from '../../apis/list'
+import article from '../../apis/article'
 import * as types from '../mutations'
 
 // initial state
@@ -14,8 +14,7 @@ const getters = {
 // actions
 const actions = {
   getLists ({ commit }) {
-    console.log(list)
-    list.getLists((lists) => {
+    article.getLists((lists) => {
       commit(types.RECEIVE_LISTS, {lists})
     })
   }

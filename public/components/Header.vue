@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="container">
+    <div class="wrapper">
       <el-row :gutter="10">
         <el-col :xs="6" :sm="6" :md="6" :lg="6">
           <h1><img class="logo" src="../assets/logo.png" /></h1>

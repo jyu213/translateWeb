@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 // import * as actions from './actions'
 // import * as getters from './getters'
 import list from './modules/list'
+import upload from './modules/upload'
 
 Vue.use(Vuex)
 
@@ -12,7 +13,8 @@ export default new Vuex.Store({
   // actions,
   // getters,
   modules: {
-    list
+    list,
+    upload
   },
   strict: debug
 })
