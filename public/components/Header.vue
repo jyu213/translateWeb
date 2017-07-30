@@ -8,13 +8,36 @@
         <el-col :xs="18" :sm="18" :md="18" :lg="18">
           <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
             <el-menu-item index="1"><a href="#list" target="_blank">列表</a></el-menu-item>
-            <el-menu-item index="2"><a href="#user" target="_blank">个人中心</a></el-menu-item>
+            <el-menu-item index="2"><a href="#user" target="_blank">个人中心 {{username}}</a></el-menu-item>
           </el-menu>
         </el-col>
       </el-row>
     </div>
   </header>
 </template>
+
+<script>
+  import { mapGetters } from 'vuex'
+
+  export default {
+    data () {
+      return {
+        activeIndex: '1'
+      };
+    },
+    computed: mapGetters({
+      username: 'username'
+    }),
+    created () {
+      this.$store.dispatch('getUser')
+    },
+    methods: {
+      handleSelect (key, keyPath) {
+        console.log(key, keyPath);
+      }
+    }
+  }
+</script>
 
 <style>
   .header{
@@ -50,18 +73,3 @@
   }
 </style>
 
-<script>
-
-  export default {
-    data () {
-      return {
-        activeIndex: '1'
-      };
-    },
-    methods: {
-      handleSelect (key, keyPath) {
-        console.log(key, keyPath);
-      }
-    }
-  }
-</script>

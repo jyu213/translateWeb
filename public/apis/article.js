@@ -1,10 +1,13 @@
 /**
  * Mocking client-server processing
  */
+const headers = new Headers()
+headers.append('Content-Type', 'application/json')
+
 export default {
   getLists (cb, errorCb) {
     const url = `/api/article/list`
-    fetch(url).then((response) => {
+    fetch(url, {credentials: 'include'}).then((response) => {
       return response.json()
     }).then((result) => {
       console.log(result, typeof result)
@@ -22,9 +25,11 @@ export default {
 
     fetch(url, {
       method: 'POST',
+      headers: headers,
+      credentials: 'include',
       body: JSON.stringify(params)
-    }).then((responese) => {
-      return responese.json()
+    }).then((response) => {
+      return response.json()
     }).then((result) => {
       console.log(result, typeof result)
       if (result.success) {

@@ -33,6 +33,10 @@ export default {
     margin: 0 auto;
     max-width: 640px;
   }
+  .xm-wrapper{
+    margin: 0 auto;
+    max-width: 320px;
+  }
   html{
     font-size: 10px;
   }

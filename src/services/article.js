@@ -103,28 +103,28 @@ exports.update = (id, params) => {
       if (typeof (id) === 'undefined') {
         reject('miss param id')
       }
-      let sqlArr = params.keys().length > 0 ? [`MODIFY_TIME=${currentTime}`] : []
+      let sqlArr = params.keys().length > 0 ? [`MODIFY_TIME='${currentTime}'`] : []
 
       Object.entries(params).map((item, key) => {
         switch (item[0]) {
           case 'title':
-            sqlArr.push(`PROJECT_TITLE=${title}`)
+            sqlArr.push(`PROJECT_TITLE='${title}'`)
             break
           case 'link':
-            sqlArr.push(`PROJECT_LINK=${link}`)
+            sqlArr.push(`PROJECT_LINK='${link}'`)
             break
           case 'author':
-            sqlArr.push(`PROJECT_AUTHOR=${author}`)
+            sqlArr.push(`PROJECT_AUTHOR='${author}'`)
             break
           case 'description':
-            sqlArr.push(`PROJECT_DESCRIPTION=${description}`)
+            sqlArr.push(`PROJECT_DESCRIPTION='${description}'`)
             break
           case 'tags':
-            sqlArr.push(`TAGS=${tags}`)
+            sqlArr.push(`TAGS='${tags}'`)
             break
         }
       })
-      const SQL = `SELECT * FROM ${ARTICLES_TABLE} SET ${sqlArr.join(' AND ')} WHERE ID=${id}`
+      const SQL = `SELECT * FROM ${ARTICLES_TABLE} SET ${sqlArr.join(' AND ')} WHERE ID='${id}'`
 
       db.run(SQL, (err) => {
         if (err) {
@@ -148,7 +148,7 @@ exports.list = (params) => {
   for (let key in params) {
     switch (key) {
       case 'userId':
-        params[key] && sqlArr.push(`USER_ID=${params[key]}`)
+        params[key] && sqlArr.push(`USER_ID='${params[key]}'`)
         break;
     }
   }

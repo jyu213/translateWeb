@@ -37,7 +37,7 @@ export default {
     lists: 'getLists'
   }),
   created () {
-    console.log(this.$store)
+    console.log(this.$store, 'list store')
     this.$store.dispatch('getLists')
   }
 }

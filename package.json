@@ -5,14 +5,10 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "start": "pm2 start pm2.json",
+    "start": "pm2 start pm2.json --watch src",
     "static-dev": "node tasks/dev-server.js",
     "static-start": "node tasks/dev-server.js",
-    "static-build": "node tasks/build.js",
-    "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
-    "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e",
-    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
+    "static-build": "node tasks/build.js"
   },
   "author": "",
   "license": "ISC",
@@ -73,6 +69,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.30",
     "karma-webpack": "^2.0.2",
+    "koa-session": "^5.4.0",
     "lolex": "^1.5.2",
     "mocha": "^3.2.0",
     "nightwatch": "^0.9.12",

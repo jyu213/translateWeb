@@ -4,6 +4,8 @@ import Vuex from 'vuex'
 // import * as getters from './getters'
 import list from './modules/list'
 import upload from './modules/upload'
+import register from './modules/register'
+import login from './modules/login'
 
 Vue.use(Vuex)
 
@@ -14,7 +16,9 @@ export default new Vuex.Store({
   // getters,
   modules: {
     list,
-    upload
+    upload,
+    register,
+    login
   },
   strict: debug
 })
