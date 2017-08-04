@@ -5,8 +5,12 @@ const headers = new Headers()
 headers.append('Content-Type', 'application/json')
 
 export default {
-  getLists (cb, errorCb) {
-    const url = `/api/article/list`
+  getLists (params, cb, errorCb) {
+    const query = Object.keys(params).map((item) => {
+      return `${encodeURIComponent(item)}=${encodeURIComponent(params[item])}`
+    }).join('&')
+    const url = `/api/article/list?${query}`
+
     fetch(url, {credentials: 'include'}).then((response) => {
       return response.json()
     }).then((result) => {

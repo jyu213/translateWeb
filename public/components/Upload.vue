@@ -56,6 +56,8 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           const params = this.articleUpload
+
+          params.status = this.articleUpload.author ? 'DOING' : 'ON'
           this.$store.dispatch('addArticle', params).then(() => {
             this.$message({
               message: '提交成功',

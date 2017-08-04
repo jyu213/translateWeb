@@ -31,6 +31,7 @@ var devMiddleware = require('webpack-dev-middleware')(compiler, {
 })
 
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {
+  publicPath: webpackConfig.output.publicPath,
   log: () => {}
 })
 // force page reload when html-webpack-plugin template changes
@@ -75,9 +76,9 @@ console.log('> Starting dev server...')
 devMiddleware.waitUntilValid(() => {
   console.log('> Listening at ' + uri + '\n')
   // when env is testing, don't need open it
-  if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
-    opn(uri)
-  }
+  // if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
+  //   opn(uri)
+  // }
   _resolve()
 })
 

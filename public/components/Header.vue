@@ -3,12 +3,15 @@
     <div class="wrapper">
       <el-row :gutter="10">
         <el-col :xs="6" :sm="6" :md="6" :lg="6">
-          <h1><img class="logo" src="../assets/logo.png" /></h1>
+          <h1 class="logo-font">LU</h1>
         </el-col>
         <el-col :xs="18" :sm="18" :md="18" :lg="18">
           <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-            <el-menu-item index="1"><a href="#list" target="_blank">列表</a></el-menu-item>
-            <el-menu-item index="2"><a href="#user" target="_blank">个人中心 {{username}}</a></el-menu-item>
+            <el-menu-item index="1"><router-link to="list">文章</router-link></el-menu-item>
+            <el-menu-item index="1"><router-link to="upload">推荐</router-link></el-menu-item>
+
+            <el-menu-item v-if="username === ''" index="2"><router-link to="login">登录</router-link></el-menu-item>
+            <el-menu-item v-else index="2"><router-link to="my">{{username}}</router-link></el-menu-item>
           </el-menu>
         </el-col>
       </el-row>
@@ -33,7 +36,7 @@
     },
     methods: {
       handleSelect (key, keyPath) {
-        console.log(key, keyPath);
+        console.log(key, keyPath)
       }
     }
   }
@@ -49,6 +52,11 @@
     position: relative;
     top: 10px;
     width: 40px; height: 40px;
+  }
+  .logo-font{
+    color: #FE864A;
+    font-size: 40px;
+    font-family: sans-serif;
   }
   .el-col {
   }

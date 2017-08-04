@@ -10,6 +10,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('registerForm')">注册</el-button>
+        <router-link to="login" class="tips">已有帐号，点击登录</router-link>
       </el-form-item>
     </el-form>
   </div>
@@ -53,7 +54,7 @@ export default {
               message: '注册成功',
               type: 'success'
             })
-            window.location.href = '#list'
+            this.$router.push('list')
           }).catch((err) => {
             this.$message.error(`${err}`)
           })

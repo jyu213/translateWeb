@@ -6,17 +6,6 @@ api.get('/article/list', async (ctx) => {
   try {
     let data = await article.list()
 
-    // ctx.cookies.set('key', 'value', {
-    //   maxAge: 10 * 60 * 1000,
-    //   httpOnly: false,
-    //   domain: 'h5.lu.com',
-    //   expires: new Date('2018-02-15'),
-    //   key: 'koa:sess',
-    //   overwrite: false,
-    // });
-
-    console.log(ctx.session, 'user')
-    // console.log(ctx.cookies.get('key'))
     ctx.body = {
       success: true,
       message: 'success',
@@ -45,6 +34,34 @@ api.post('/article/add', async (ctx) => {
     ctx.body = {
       success: false,
       message: err
+    }
+  }
+})
+
+api.patch('/article/update', async (ctx) => {
+  const params = ctx.query
+  const {id} = params
+
+  if (typeof id === 'undefined') {
+    ctx.body = {
+      success: false,
+      message: '缺失 ID',
+      data: []
+    }
+  }
+  try {
+    await article.update(id, params)
+
+    ctx.body = {
+      success: true,
+      message: '',
+      data: []
+    }
+  } catch (err) {
+    ctx.body = {
+      success: false,
+      message: err,
+      data: []
     }
   }
 })

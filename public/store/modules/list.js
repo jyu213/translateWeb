@@ -13,8 +13,9 @@ const getters = {
 
 // actions
 const actions = {
-  getLists ({ commit }) {
-    article.getLists((lists) => {
+  getLists ({ commit }, params) {
+    // @TODO: reset params
+    article.getLists({page: 50}, (lists) => {
       commit(types.RECEIVE_LISTS, {lists})
     })
   }

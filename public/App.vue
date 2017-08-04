@@ -42,5 +42,14 @@ export default {
   }
   body{
     font-size: 1.4rem;
+    font-family: 'helvetica','tahoma','arial','sans-serif';
+  }
+
+  .main{
+    margin-right: 250px;
+  }
+  .sider{
+    width: 230px;
+    float: right;
   }
 </style>
