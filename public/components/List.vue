@@ -14,15 +14,16 @@
               <a :href="item.link" target="_blank">{{item.title}}</a>
             </h3>
             <p class="card--options options">
-              <span class="options--span">{{item.author}}译</span>
+              <span class="options--span">{{item.author ? `${item.author}译` : ''}}</span>
                 <span class="options--span">{{item.time}}</span>
-                <span class="options--span">tag tag tag</span>
+                <!-- <span class="options--span">tag tag tag</span> -->
             </p>
             <div class="card--description">
               {{item.description}}
             </div>
-            <div class="card--button">
-              <el-button type="primary" @click="onClaim(item.id)">认领</el-button>
+            <div v-if="username !== ''" class="card--button">
+              <el-button v-if="!item.author" type="primary" width="80" @click="onClaim(item.id)">认领</el-button>
+              <el-button v-if="item.author === username" type="primary" :plain="true" width="80">已认领</el-button>
             </div>
           </div>
         </li>
@@ -37,7 +38,7 @@
       </div>
       -->
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -119,6 +120,10 @@ export default {
     position: absolute;
     top: 4px;
     right: 0;
+    width: 80px;
+  }
+  .card--button button{
+    width: 100%;
   }
   .pagination{
     margin: 3% 0;

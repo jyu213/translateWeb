@@ -3,6 +3,7 @@
  */
 const CONFIG = require('../../config/constant')
 const ARTICLES_TABLE = 'articles'
+const USER_TABLE = 'user'
 
 const sqlite3 = require('sqlite3').verbose()
 const db = new sqlite3.Database(CONFIG.DBPATH)
@@ -159,7 +160,9 @@ exports.list = (params) => {
         break;
     }
   }
-  const SQL = `SELECT * FROM ${ARTICLES_TABLE} ${sqlArr.length > 0 ? 'WHERE ' + sqlArr.join(' AND ') : ''} ORDER BY MODIFY_TIME`
+  const SQL = `SELECT *, USERNAME FROM ${ARTICLES_TABLE} LEFT OUTER JOIN ${USER_TABLE} ON
+              ${ARTICLES_TABLE}.PROJECT_AUTHOR=${USER_TABLE}.ID
+              ${sqlArr.length > 0 ? 'WHERE ' + sqlArr.join(' AND ') : ''} ORDER BY MODIFY_TIME`
   let promise = new Promise((resolve, reject) => {
     console.log('RUN SQL: ', SQL)
     db.all(SQL, (err, rows) => {
@@ -171,6 +174,7 @@ exports.list = (params) => {
           id: item.ID,
           userId: item.USER_ID,
           title: item.PROJECT_TITLE,
+          author: item.USERNAME,
           link: item.PROJECT_LINK,
           description: item.PROJECT_DESCRIPTION,
           status: item.PROJECT_STATUS,

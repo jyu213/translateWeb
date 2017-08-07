@@ -121,7 +121,6 @@ exports.list = (params) => {
         return {
           id: item.ID,
           username: item.USERNAME,
-          password: item.PASSWORD,
           profile: item.PROFILE,
           role: item.ROLE,
           createTime: item.CREATE_TIME,

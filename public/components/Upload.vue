@@ -9,7 +9,7 @@
       </el-form-item>
       <el-form-item label="指派译者">
         <el-select v-model="articleUpload.author" placeholder="选择指派作者，默认为空" style="width: 100%;">
-            <el-option v-bind:key="item.id" v-bind:label="item.name" v-bind:value="item.id" v-for="item in authorList"></el-option>
+            <el-option v-bind:key="item.id" v-bind:label="item.username" v-bind:value="item.id" v-for="item in authorList"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="详情">
