@@ -18,6 +18,11 @@ const actions = {
     article.getLists({page: 50}, (lists) => {
       commit(types.RECEIVE_LISTS, {lists})
     })
+  },
+  updateArticle ({ commit }, params) {
+    article.updateArticle(params, (data) => {
+      commit(types.UPDATE_ARTICLE, {data})
+    })
   }
 }
 
@@ -25,6 +30,10 @@ const actions = {
 const mutations = {
   [types.RECEIVE_LISTS] (state, { lists }) {
     state.all = lists
+  },
+  [types.UPDATE_ARTICLE] (state, { data }) {
+    // @TODO: check
+    state.update = data;
   }
 }
 

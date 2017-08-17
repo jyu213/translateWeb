@@ -46,7 +46,6 @@ exports.create = (params) => {
         $modify_time: currentTime
       }
 
-      console.log(data, 'the data')
       const INSERT_SQL = `INSERT INTO ${ARTICLES_TABLE} VALUES ($id,
                                       $user_id, $project_title, $project_link, $project_author,
                                       $project_description, $project_tags, $project_status, $project_content,
@@ -105,12 +104,16 @@ exports.update = (id, params) => {
       const {title, link, author, description, tags, status} = params
       const currentTime = (new Date()).getTime()
 
-      if (typeof (id) === 'undefined') {
+      if (typeof id === 'undefined') {
+        console.log('bbb')
         reject('miss param id')
       }
-      let sqlArr = params.keys().length > 0 ? [`MODIFY_TIME='${currentTime}'`] : []
 
+      let sqlArr = Object.keys(params).length > 0 ? [`MODIFY_TIME='${currentTime}'`] : []
+
+      console.log('aaa', sqlArr)
       Object.entries(params).map((item, key) => {
+        console.log(item[0])
         switch (item[0]) {
           case 'title':
             sqlArr.push(`PROJECT_TITLE='${title}'`)
@@ -132,8 +135,9 @@ exports.update = (id, params) => {
             break
         }
       })
-      const SQL = `SELECT * FROM ${ARTICLES_TABLE} SET ${sqlArr.join(' AND ')} WHERE ID='${id}'`
+      const SQL = `UPDATE ${ARTICLES_TABLE} SET ${sqlArr.join(', ')} WHERE ID='${id}'`
 
+      console.log('RUN SQL: ', SQL)
       db.run(SQL, (err) => {
         if (err) {
           reject(err)
@@ -160,8 +164,8 @@ exports.list = (params) => {
         break;
     }
   }
-  const SQL = `SELECT *, USERNAME FROM ${ARTICLES_TABLE} LEFT OUTER JOIN ${USER_TABLE} ON
-              ${ARTICLES_TABLE}.PROJECT_AUTHOR=${USER_TABLE}.ID
+  const SQL = `SELECT *, a.ID as AID, u.ID as UID, USERNAME FROM ${ARTICLES_TABLE} as a LEFT OUTER JOIN ${USER_TABLE} as u ON
+              a.PROJECT_AUTHOR=u.ID
               ${sqlArr.length > 0 ? 'WHERE ' + sqlArr.join(' AND ') : ''} ORDER BY MODIFY_TIME`
   let promise = new Promise((resolve, reject) => {
     console.log('RUN SQL: ', SQL)
@@ -171,9 +175,10 @@ exports.list = (params) => {
       }
       let data = rows.map((item) => {
         return {
-          id: item.ID,
-          userId: item.USER_ID,
+          id: item.AID,
+          userId: item.UID,
           title: item.PROJECT_TITLE,
+          // author: item.PROJECT_AUTHOR,
           author: item.USERNAME,
           link: item.PROJECT_LINK,
           description: item.PROJECT_DESCRIPTION,

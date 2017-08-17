@@ -1,5 +1,6 @@
 const Router = require('koa-router')
 const article = require('../services/article')
+const user = require('../services/user')
 let api = new Router()
 
 api.get('/article/list', async (ctx) => {
@@ -39,8 +40,9 @@ api.post('/article/add', async (ctx) => {
 })
 
 api.patch('/article/update', async (ctx) => {
-  const params = ctx.query
-  const {id} = params
+  let params = ctx.request.body
+  const {id, username} = params
+  let {author} = params
 
   if (typeof id === 'undefined') {
     ctx.body = {
@@ -49,6 +51,16 @@ api.patch('/article/update', async (ctx) => {
       data: []
     }
   }
+  // @FIX: pass username instend of userId
+  if (username && typeof author === 'undefined') {
+    const userData = await user.isExist({username})
+    if (userData.length > 0) {
+      params = Object.assign(params, {
+        author: userData[0].id
+      })
+    }
+  }
+
   try {
     await article.update(id, params)
 

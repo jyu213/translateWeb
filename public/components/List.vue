@@ -51,18 +51,20 @@ export default {
     username: 'username'
   }),
   created () {
-    console.log(this.$store, 'list store')
     this.$store.dispatch('getLists')
   },
   methods: {
     onClaim (id) {
-      console.log(id)
       if (!this.username) {
         this.$router.push('login')
       } else {
-        const params = {}
-        this.$store.dispatch('update', params).then(() => {
-          // revert button?
+        const params = {
+          id,
+          username: this.username
+        }
+        this.$store.dispatch('updateArticle', params).then(() => {
+          // @TODO: revert button
+          this.$store.dispatch('getLists')
         }).catch((err) => {
           this.$message.error(`${err}`)
         })

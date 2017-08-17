@@ -4,11 +4,13 @@ import * as types from '../mutations'
 // initial state
 const state = {
   username: ''
+  // userId: ''
 }
 
 // getters
 const getters = {
   username: state => state.username
+  // userId: state => state.userId
 }
 
 // actions
@@ -43,10 +45,12 @@ const mutations = {
   [types.RECEIVE_USER_LOGIN] (state, {data}) {
     console.log('user login success:', data)
     state.username = data[0].username
+    // state.userId = data[0].userId
   },
   [types.FAILS_USER_LOGIN] (state, {data}) {
     console.log('user login fails')
     state.username = ''
+    // state.userId = ''
   }
 }
 

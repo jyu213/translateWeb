@@ -45,6 +45,7 @@ exports.create = (params) => {
         if (err) {
           reject(err)
         }
+        // TODO
         resolve('success')
       })
     })
@@ -71,7 +72,7 @@ exports.update = (id, params) => {
       if (typeof (id) === 'undefined') {
         reject('miss param id')
       }
-      let sqlArr = params.keys().length > 0 ? [`MODIFY_TIME='${currentTime}'`] : []
+      let sqlArr = Object.keys(params).length > 0 ? [`MODIFY_TIME='${currentTime}'`] : []
 
       Object.entries(params).map((item, key) => {
         switch (item[0]) {
@@ -89,7 +90,7 @@ exports.update = (id, params) => {
             break
         }
       })
-      const SQL = `SELECT * FROM ${USER_TABLE} SET ${sqlArr.join(' AND ')} WHERE ID='${id}'`
+      const SQL = `UPDATE ${USER_TABLE} SET ${sqlArr.join(' , ')} WHERE ID='${id}'`
 
       console.log('RUNSQL: ', SQL)
       db.run(SQL, (err) => {
@@ -136,6 +137,7 @@ exports.list = (params) => {
 
 /**
  * @Service: 用户是否存在
+ * @TODO: 拆分
  *
  * @param {Number} id, 用户 id
  * @param {String} username, 用户名
