@@ -9,6 +9,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('loginForm')">登录</el-button>
+        <router-link to="register" class="tips">没有帐号，点击注册</router-link>
       </el-form-item>
     </el-form>
   </div>
@@ -43,7 +44,6 @@ export default {
         if (valid) {
           const params = this.login
           this.$store.dispatch('login', params).then((data) => {
-            console.log('success!!!', data)
             this.$router.push('list')
           }).catch(() => {
             this.$message.error(`登录失败`)

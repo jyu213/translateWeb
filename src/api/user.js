@@ -38,6 +38,7 @@ api.post('/user/add', async (ctx) => {
   const data = await user.create(params)
   try {
     ctx.session.user = params.username
+    // ctx.session.userId = params.userId
     ctx.body = {
       success: true,
       message: 'success',
@@ -83,7 +84,6 @@ api.get('/user/login', async (ctx) => {
   try {
     let data = await user.isExist({username, password})
     console.log(username, ':api user login username ')
-    console.log(ctx, ctx.session)
 
     // ctx.cookies.set('koa:sess', username, {
     //   maxAge: 1296000000,
@@ -98,7 +98,6 @@ api.get('/user/login', async (ctx) => {
       data: data
     }
   } catch (err) {
-    console.log(err, ' a')
     ctx.body = {
       success: false,
       message: err,
