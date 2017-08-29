@@ -63,8 +63,7 @@ export default {
               message: '提交成功',
               type: 'success'
             })
-            // this.$data = initDefaultData()
-            Object.assign(this.$data, this.$options.data());
+            Object.assign(this.$data.articleUpload, this.$options.data().articleUpload);
           }).catch((err) => {
             this.$message.error(`提交失败：${err}`)
           })

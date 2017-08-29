@@ -166,7 +166,7 @@ exports.list = (params) => {
   }
   const SQL = `SELECT *, a.ID as AID, u.ID as UID, USERNAME FROM ${ARTICLES_TABLE} as a LEFT OUTER JOIN ${USER_TABLE} as u ON
               a.PROJECT_AUTHOR=u.ID
-              ${sqlArr.length > 0 ? 'WHERE ' + sqlArr.join(' AND ') : ''} ORDER BY MODIFY_TIME`
+              ${sqlArr.length > 0 ? 'WHERE ' + sqlArr.join(' AND ') : ''} ORDER BY CREATE_TIME`
   let promise = new Promise((resolve, reject) => {
     console.log('RUN SQL: ', SQL)
     db.all(SQL, (err, rows) => {
