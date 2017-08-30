@@ -1,0 +1,12 @@
+{
+  "name": "translate-web",
+  "script": "app.js",
+  "watch": false,
+  "watch_options" : {
+    "useFsEvents": false
+  },
+  "env": {
+      "NODE_ENV": "production",
+      "PORT": "3000"
+  }
+}

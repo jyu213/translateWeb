@@ -22,14 +22,20 @@ app.use(session({
   maxAge: 86400000
 }, app))
 
-// 静态资源
-// @TODO: change staic path
-app.use(serve(path.resolve(__dirname, './public')))
+if (process.env.NODE_ENV !== 'development') {
+  // 静态资源
+  app.use(serve(path.resolve(__dirname, './dist')))
 
-// 模板引擎
-app.use(views(path.resolve(__dirname, './src/views'), {
-  extension: 'ejs'
-}))
+  // 模板引擎
+  app.use(views(path.resolve(__dirname, './dist/src/views'), {
+    extension: 'ejs'
+  }))
+} else {
+  // 模板引擎
+  app.use(views(path.resolve(__dirname, './src/views'), {
+    extension: 'ejs'
+  }))
+}
 
 // 装载所有子路由
 let router = new Router()
