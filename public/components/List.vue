@@ -15,7 +15,7 @@
             </h3>
             <p class="card--options options">
               <span class="options--span">{{item.author ? `${item.author}译` : ''}}</span>
-                <span class="options--span">{{item.time}}</span>
+                <span class="options--span">{{item.createTime}}</span>
                 <!-- <span class="options--span">tag tag tag</span> -->
             </p>
             <div class="card--description">

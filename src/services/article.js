@@ -8,6 +8,12 @@ const USER_TABLE = 'user'
 const sqlite3 = require('sqlite3').verbose()
 const db = new sqlite3.Database(CONFIG.DBPATH)
 
+function formateDate (date) {
+  date = date * 1
+  const d = new Date(date)
+  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
+}
+
 /**
  * @Service: 创建单列表条目
  *
@@ -184,8 +190,8 @@ exports.list = (params) => {
           description: item.PROJECT_DESCRIPTION,
           status: item.PROJECT_STATUS,
           tags: item.TAGS,
-          createTime: item.CREATE_TIME,
-          modifyTime: item.MODIFY_TIME
+          createTime: formateDate(item.CREATE_TIME),
+          modifyTime: formateDate(item.MODIFY_TIME)
         }
       }) || []
       resolve(data)
